@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emission Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            padding: 50px;
+            text-align: center;
+        }
+        h1 {
+            color: #4a3fb7;
+        }
+        .result {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .color-bar {
+            width: 100%;
+            height: 30px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .warning {
+            color: red;
+        }
+        .friendly-warning {
+            color: orange;
+        }
+        .good {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Carbon Emission Result</h1>
+    <div class="result" id="result"></div>
+    <div class="color-bar" id="colorBar"></div>
+    <div class="message" id="message"></div>
+
+    <script>
+        // Function to get query parameters from URL
+        function getQueryParams() {
+            const params = {};
+            window.location.search.slice(1).split('&').forEach(function(part) {
+                const [key, value] = part.split('=');
+                params[decodeURIComponent(key)] = decodeURIComponent(value);
+            });
+            return params;
+        }
+
+        // Display the result
+        const params = getQueryParams();
+        const emission = parseFloat(params.emission) || 0;
+        document.getElementById('result').innerHTML = `Total Carbon Emission: ${emission} kg CO2`;
+
+        // Color bar and messages based on emission levels
+        const colorBar = document.getElementById('colorBar');
+        const message = document.getElementById('message');
+
+        if (emission > 1500) {
+            colorBar.style.backgroundColor = 'red';
+            message.innerHTML = 'Warning: Your carbon footprint exceeds acceptable levels!';
+            message.className = 'warning';
+        } else if (emission > 1000) {
+            colorBar.style.backgroundColor = 'orange';
+            message.innerHTML = 'Friendly Reminder: Your carbon footprint is high, consider reducing it.';
+            message.className = 'friendly-warning';
+        } else {
+            colorBar.style.backgroundColor = 'green';
+            message.innerHTML = 'Great job! Your carbon footprint is within a good range.';
+            message.className = 'good';
+        }
+    </script>
+
+</body>
+</html>

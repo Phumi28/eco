@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbon Emission Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            padding: 50px;
+            text-align: center;
+        }
+        h1 {
+            color: #4a3fb7;
+            margin-bottom: 20px;
+        }
+        .calculator-container {
+            background-color: white;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        input[type="number"] {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #4a3fb7;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #362e9e;
+        }
+        /* Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 30px;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .close-btn {
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            float: right;
+            margin-top: -10px;
+        }
+        .result {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .color-bar {
+            width: 100%;
+            height: 30px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .warning {
+            color: red;
+        }
+        .friendly-warning {
+            color: orange;
+        }
+        .good {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Carbon Emission Calculator</h1>
+
+    <div class="calculator-container">
+        <h3>Enter your details below</h3>
+
+        <label for="carbon">Vehicle Carbon Emission per km (in kg):</label><br>
+        <input type="number" id="carbon" placeholder="e.g. 0.12"><br>
+
+        <label for="transportation">Total Kilometers Traveled:</label><br>
+        <input type="number" id="transportation" placeholder="e.g. 50"><br>
+
+        <button onclick="calculateEmission()">Calculate Total Emission</button>
+    </div>
+
+    <!-- Modal Popup -->
+    <div class="modal" id="emissionModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h1>Carbon Emission Result</h1>
+            <div class="result" id="result"></div>
+            <div class="color-bar" id="colorBar"></div>
+            <div class="message" id="message"></div>
+        </div>
+    </div>
+
+    <script>
+        function calculateEmission() {
+            // Retrieve input values
+            const carbonEmission = parseFloat(document.getElementById('carbon').value);
+            const transportation = parseFloat(document.getElementById('transportation').value);
+
+            if (isNaN(carbonEmission) || isNaN(transportation) || carbonEmission <= 0 || transportation <= 0) {
+                alert("Please enter valid values for carbon emission per km and kilometers traveled.");
+                return;
+            }
+
+            // Calculate total emission in kg
+            const totalEmission = carbonEmission * transportation;
+
+            // Display result in modal
+            document.getElementById('result').innerHTML = `Total Carbon Emission: ${totalEmission.toFixed(2)} g CO₂`;
+
+            const colorBar = document.getElementById('colorBar');
+            const message = document.getElementById('message');
+
+            // Determine color and message based on emission levels
+            if (totalEmission > 1500) {
+                colorBar.style.backgroundColor = 'red';
+                message.innerHTML = 'Warning: Your carbon footprint exceeds acceptable levels!';
+                message.className = 'warning';
+            } else if (totalEmission > 1000) {
+                colorBar.style.backgroundColor = 'orange';
+                message.innerHTML = 'Friendly Reminder: Your carbon footprint is high, consider reducing it.';
+                message.className = 'friendly-warning';
+            } else {
+                colorBar.style.backgroundColor = 'green';
+                message.innerHTML = 'Great job! Your carbon footprint is within a good range.';
+                message.className = 'good';
+            }
+
+            // Show the modal
+            document.getElementById('emissionModal').style.display = 'flex';
+        }
+
+        // Close modal function
+        function closeModal() {
+            document.getElementById('emissionModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('emissionModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+
+</body>
+</html>
