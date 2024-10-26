@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #f4f4f4;
+          color: #333;
+      }
+      #about_us {
+          padding: 50px 20px;
+          background-color: #e7f5e8;
+      }
+      .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 15px;
+      }
+      .row {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: center;
+          gap: 20px;
+      }
+      .col-md-5, .col-md-7 {
+          padding: 15px;
+          box-sizing: border-box;
+      }
+      .titlepage h2 {
+          font-size: 2em;
+          color: #28a745;
+          margin-bottom: 20px;
+          text-align: center;
+      }
+      .titlepage p {
+          font-size: 1.1em;
+          line-height: 1.6;
+          color: #555;
+          text-align: justify;
+      }
+      .about_right figure {
+          margin: 0;
+          padding: 0;
+          text-align: center;
+      }
+      .about_right img {
+          width: 100%;
+          max-width: 500px;
+          border-radius: 8px;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 992px) {
+          .col-md-5, .col-md-7 {
+              flex: 1 1 100%;
+              max-width: 100%;
+              text-align: center;
+          }
+          .titlepage h2 {
+              font-size: 1.8em;
+          }
+          .titlepage p {
+              font-size: 1em;
+          }
+          .about_right img {
+              max-width: 90%;
+          }
+      }
+
+      @media (max-width: 600px) {
+          #about_us {
+              padding: 30px 15px;
+          }
+          .titlepage h2 {
+              font-size: 1.6em;
+          }
+          .titlepage p {
+              font-size: 0.95em;
+          }
+          .about_right img {
+              max-width: 100%;
+          }
+      }
+      <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff; /* Set background to white */
+            color: #333; /* Set text color to dark */
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1em;
+            padding: 10px;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #ddd;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .content {
+            padding: 20px;
+        }
+        .mission {
+            width: 100%;
+            height: auto; /* Change height to auto to accommodate content */
+            background-color: #4CAF50; /* Green background */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5em; /* Adjust font size for better visibility */
+            padding: 20px; /* Add padding for spacing */
+            text-align: center; /* Center text */
+        }
+        
+        .section-title {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .card {
+            min-width: 800px;
+            max-width: 1000px; /* Optional: set a max width for cards */
+            margin: 15px; /* Add margin for spacing */
+            border-radius: 0px; /* Set border radius */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box shadow */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{{ url_for('dashboard') }}">Home</a>
+            <a href="{{ url_for('predictor_result') }}">Emission Calculator</a>
+
+            <a href="{{ url_for('about_us') }}">About Us</a>
+            <a href="{{ url_for('contact_us') }}">Contact Us</a>
+            
+            
+        </nav>
+    </header>
+
+<body>
+    <div id="about_us" class="about">
+        <div class="container">
+           <div class="row">
+              <div class="col-md-5">
+                 <div class="row">
+                    <div class="col-md-12">
+                       <div class="titlepage">
+                          <h2>About</h2>
+                          <p>Welcome to EcoTrack SA – Your Partner in Building a Sustainable Future
+
+                             At EcoTrack SA, we’re committed to empowering South Africans to make meaningful changes in their lives and businesses to reduce their carbon footprints. Our AI-powered platform is designed to provide personalized insights into your daily activities and show how simple adjustments can lead to a significant environmental impact.
+                             
+                             With South Africa’s unique energy landscape and environmental challenges, EcoTrack SA was built to offer solutions tailored specifically to our country’s needs. We enable users to measure and track emissions from transportation, energy use, and consumption patterns, helping you visualize and understand your impact on the environment. Our tools go beyond calculations – we guide you with a personalized carbon reduction plan, rewarding your sustainable choices and connecting you with local green projects for collective impact.
+                             
+                             At EcoTrack SA, we believe that everyone can be a force for positive change. Join us in our mission to create a cleaner, greener South Africa – one action at a time.</p>
+                       </div>
+                    </div>
+                    <div class="col-md-12">
+                       <!-- Unused code -->
+                       <!-- <div class="about_img">
+                          <figure><img src="images/about_img.png" alt="#"/></figure>
+                       </div> -->
+                    </div>
+                 </div>
+              </div>
+              <div class="col-md-7">
+                 <div class="about_right">
+                    <figure><img src="{{ url_for('static', filename='img/about_right.jpg') }}" alt="#"/></figure>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+</body>
+</html>

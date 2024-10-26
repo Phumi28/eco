@@ -3,46 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    <title>Carbon Emission Predictor</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff; /* Set background to white */
+            color: #333; /* Set text color to dark */
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1em;
+            padding: 10px;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #ddd;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .content {
+            padding: 20px;
+        }
+        .mission {
+            width: 100%;
+            height: auto; /* Change height to auto to accommodate content */
+            background-color: #4CAF50; /* Green background */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5em; /* Adjust font size for better visibility */
+            padding: 20px; /* Add padding for spacing */
+            text-align: center; /* Center text */
+        }
+        
+        .section-title {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .card {
+            min-width: 800px;
+            max-width: 1000px; /* Optional: set a max width for cards */
+            margin: 15px; /* Add margin for spacing */
+            border-radius: 0px; /* Set border radius */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box shadow */
+        }
+    </style>
 </head>
-<body class="bg-gray-100">
-    <div class="flex flex-col items-center justify-center min-h-screen">
-        <div class="w-full max-w-4xl">
-            <div class="bg-white shadow-lg rounded-lg p-6 mb-6">
-                <h2 class="text-2xl font-bold text-gray-700 mb-4">Dashboard</h2>
-                <p class="text-gray-600">Welcome, {{ session['email'] }}!</p>
-                <h3 class="text-xl font-semibold mt-6">Your Carbon Footprint</h3>
-                <ul class="mt-4">
-                    <li>Total Emissions: {{ user_data.total_emissions }} kg CO<sub>2</sub></li>
-                    <li>Transportation Emissions: {{ user_data.transportation_emissions }} kg CO<sub>2</sub></li>
-                    <li>Energy Emissions: {{ user_data.energy_emissions }} kg CO<sub>2</sub></li>
-                    <li>Waste Emissions: {{ user_data.waste_emissions }} kg CO<sub>2</sub></li>
-                </ul>
+<body>
+    <header>
+        <nav>
+            <a href="{{ url_for('dashboard') }}">Home</a>
+            <a href="{{ url_for('predictor_result') }}">Emission Calculator</a>
 
-                <h3 class="text-xl font-semibold mt-6">Goals</h3>
-                <ul class="mt-4">
-                    <li>Monthly Goal: {{ user_data.goals.monthly_goal }} kg CO<sub>2</sub></li>
-                    <li>Current Progress: {{ user_data.goals.current_progress }} kg CO<sub>2</sub></li>
-                </ul>
+            <a href="{{ url_for('about_us') }}">About Us</a>
+            <a href="{{ url_for('contact_us') }}">Contact Us</a>
+            
+            
+        </nav>
+    </header>
 
-                <h3 class="text-xl font-semibold mt-6">Recommendations</h3>
-                <ul class="mt-4 list-disc pl-5">
-                    {% for recommendation in user_data.recommendations %}
-                        <li>{{ recommendation }}</li>
-                    {% endfor %}
-                </ul>
+    <div class="content">
+        <h1>CO2 Emissions Dashboard</h1>
 
-                <h3 class="text-xl font-semibold mt-6">Recent Activities</h3>
-                <ul class="mt-4 list-disc pl-5">
-                    {% for activity in user_data.recent_activities %}
-                        <li>{{ activity }}</li>
-                    {% endfor %}
-                </ul>
+        <div class="mb-4 d-flex justify-content-center flex-wrap">
+            <div class="card">
+                <div class="card-body">
+                   
+                    <div>
+                        {{ agriculture_graph_html | safe }}
+                    </div>
+                </div>
             </div>
 
-            <a href="/logout" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Logout</a>
+            <div class="card">
+                <div class="card-body">
+        
+                    <div>
+                        {{ transportation_graph_html | safe }}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+    <section class="mission">
+        <div class="mission-text">
+            <h1 class="mission-text">Our Mission</h1>
+            <p>The mission that we have is to empower individuals and organizations to understand and reduce their carbon footprint through innovative data analysis and insights. We strive to promote sustainable practices and contribute to a healthier planet by providing accessible tools and resources that drive change.</p>
+        </div>
+    </section>
+    
 </body>
 </html>

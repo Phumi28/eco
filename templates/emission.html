@@ -35,8 +35,82 @@
         .good {
             color: green;
         }
-    </style>
-</head>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #ffffff; /* Set background to white */
+                color: #333; /* Set text color to dark */
+            }
+            header {
+                background-color: #333;
+                color: white;
+                padding: 10px 0;
+                text-align: center;
+            }
+            nav {
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+            }
+            nav a {
+                color: white;
+                text-decoration: none;
+                font-size: 1.1em;
+                padding: 10px;
+                transition: color 0.3s;
+            }
+            nav a:hover {
+                color: #ddd;
+            }
+            h1 {
+                color: #333;
+                text-align: center;
+                margin-top: 20px;
+            }
+            .content {
+                padding: 20px;
+            }
+            .mission {
+                width: 100%;
+                height: auto; /* Change height to auto to accommodate content */
+                background-color: #4CAF50; /* Green background */
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 1.5em; /* Adjust font size for better visibility */
+                padding: 20px; /* Add padding for spacing */
+                text-align: center; /* Center text */
+            }
+            
+            .section-title {
+                text-align: center;
+                margin: 20px 0;
+            }
+            .card {
+                min-width: 800px;
+                max-width: 1000px; /* Optional: set a max width for cards */
+                margin: 15px; /* Add margin for spacing */
+                border-radius: 0px; /* Set border radius */
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box shadow */
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <a href="{{ url_for('dashboard') }}">Home</a>
+                <a href="{{ url_for('predictor_result') }}">Emission Calculator</a>
+    
+                <a href="{{ url_for('about_us') }}">About Us</a>
+                <a href="{{ url_for('contact_us') }}">Contact Us</a>
+                
+                
+            </nav>
+        </header>
+    
 <body>
 
     <h1>Carbon Emission Result</h1>
