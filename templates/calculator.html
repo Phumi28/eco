@@ -44,7 +44,6 @@
         button:hover {
             background-color: #362e9e;
         }
-        /* Modal Styling */
         .modal {
             display: none;
             position: fixed;
@@ -84,14 +83,11 @@
             margin: 20px 0;
             border-radius: 5px;
         }
-        .warning {
-            color: red;
-        }
-        .friendly-warning {
-            color: orange;
-        }
-        .good {
-            color: green;
+        .suggestion {
+            margin-top: 20px;
+            font-size: 18px;
+            font-style: italic;
+            color: #333;
         }
     </style>
 </head>
@@ -119,6 +115,7 @@
             <div class="result" id="result"></div>
             <div class="color-bar" id="colorBar"></div>
             <div class="message" id="message"></div>
+            <div class="suggestion" id="suggestion"></div>
         </div>
     </div>
 
@@ -141,20 +138,24 @@
 
             const colorBar = document.getElementById('colorBar');
             const message = document.getElementById('message');
+            const suggestion = document.getElementById('suggestion');
 
-            // Determine color and message based on emission levels
+            // Determine color, message, and suggestions based on emission levels
             if (totalEmission > 1500) {
                 colorBar.style.backgroundColor = 'red';
                 message.innerHTML = 'Warning: Your carbon footprint exceeds acceptable levels!';
                 message.className = 'warning';
+                suggestion.innerHTML = "AI Suggestion: Consider carpooling, using public transport, or reducing travel. High emissions could impact air quality and contribute to global warming.";
             } else if (totalEmission > 1000) {
                 colorBar.style.backgroundColor = 'orange';
                 message.innerHTML = 'Friendly Reminder: Your carbon footprint is high, consider reducing it.';
                 message.className = 'friendly-warning';
+                suggestion.innerHTML = "AI Suggestion: Try biking, walking short distances, or using hybrid/electric vehicles. Moderate emissions can impact local environments over time.";
             } else {
                 colorBar.style.backgroundColor = 'green';
                 message.innerHTML = 'Great job! Your carbon footprint is within a good range.';
                 message.className = 'good';
+                suggestion.innerHTML = "AI Suggestion: Keep up the sustainable choices! Low emissions support a healthier environment.";
             }
 
             // Show the modal

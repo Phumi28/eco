@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+</head>
+<body class="bg-gray-100">
+    <div class="flex flex-col items-center justify-center min-h-screen">
+        <div class="w-full max-w-4xl">
+            <div class="bg-white shadow-lg rounded-lg p-6 mb-6">
+                <h2 class="text-2xl font-bold text-gray-700 mb-4">Dashboard</h2>
+                <p class="text-gray-600">Welcome, {{ session['email'] }}!</p>
+                <h3 class="text-xl font-semibold mt-6">Your Carbon Footprint</h3>
+                <ul class="mt-4">
+                    <li>Total Emissions: {{ user_data.total_emissions }} kg CO<sub>2</sub></li>
+                    <li>Transportation Emissions: {{ user_data.transportation_emissions }} kg CO<sub>2</sub></li>
+                    <li>Energy Emissions: {{ user_data.energy_emissions }} kg CO<sub>2</sub></li>
+                    <li>Waste Emissions: {{ user_data.waste_emissions }} kg CO<sub>2</sub></li>
+                </ul>
+
+                <h3 class="text-xl font-semibold mt-6">Goals</h3>
+                <ul class="mt-4">
+                    <li>Monthly Goal: {{ user_data.goals.monthly_goal }} kg CO<sub>2</sub></li>
+                    <li>Current Progress: {{ user_data.goals.current_progress }} kg CO<sub>2</sub></li>
+                </ul>
+
+                <h3 class="text-xl font-semibold mt-6">Recommendations</h3>
+                <ul class="mt-4 list-disc pl-5">
+                    {% for recommendation in user_data.recommendations %}
+                        <li>{{ recommendation }}</li>
+                    {% endfor %}
+                </ul>
+
+                <h3 class="text-xl font-semibold mt-6">Recent Activities</h3>
+                <ul class="mt-4 list-disc pl-5">
+                    {% for activity in user_data.recent_activities %}
+                        <li>{{ activity }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <a href="/logout" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Logout</a>
+        </div>
+    </div>
+</body>
+</html>
